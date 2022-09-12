@@ -20,6 +20,12 @@ export default Home = () => {
                     {/* Icon */}
                 </View>
             </SafeAreaView>
+
+            {/* Titles */}
+            <View style={styles.titlesWrapper}>
+                <Text style={styles.titlesSubtitle}>Food</Text>
+                <Text style={styles.titlesTitle}>Delivery</Text>
+            </View>
         </View>
     )
 }
@@ -41,5 +47,24 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 40,
-    }
+    },
+
+    titlesWrapper: {
+        marginTop: 30,
+        paddingHorizontal: 20,
+    },
+
+    titlesSubtitle: {
+        fontFamily: 'Montserrat-Regular',
+        fontSize: 16,
+        color: colors.textDark
+    },
+
+    titlesTitle: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 32,
+        color: colors.textDark,
+        marginTop: 5
+    },
+
 })

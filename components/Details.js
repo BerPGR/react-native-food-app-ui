@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -9,6 +9,16 @@ Feather.loadFont()
 MaterialCommunityIcons.loadFont()
 
 export default Details = ({ route, navigation }) => {
+
+    const renderIngredientsItem = ({ item }) => {
+        return (
+            <View style={[styles.ingredientItemWrapper, {
+                marginLeft: item.id == '1' ? 20 : 15
+            }]}>
+                <Image source={item.image} style={styles.ingredientImage}/>
+            </View>
+        )
+    }
 
     const { item } = route.params;
     return (
@@ -56,6 +66,20 @@ export default Details = ({ route, navigation }) => {
 
                 <View>
                     <Image source={item.image} style={styles.itemImage}/>
+                </View>
+            </View>
+
+            {/* Ingredients */}
+            <View style={styles.ingredientsWrapper}>
+                <Text style={styles.ingredientsTitle}>Ingredients</Text>
+                <View style={styles.ingredientsListWrapper}>
+                <FlatList 
+                        data={item.ingredients}
+                        renderItem={renderIngredientsItem}
+                        keyExtractor={item => item.id}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
                 </View>
             </View>
         </View>
@@ -114,7 +138,7 @@ const styles = StyleSheet.create({
     },
 
     infoWrapper: {
-        marginTop: 60,
+        marginTop: 40,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -143,6 +167,42 @@ const styles = StyleSheet.create({
     itemImage: {
         resizeMode: 'contain',
         marginLeft: 50
+    },
+
+    ingredientsWrapper: {
+        marginTop: 30
+    },
+
+    ingredientsTitle: {
+        paddingHorizontal: 20,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 16,
+        color: colors.textDark
+    },
+
+    ingredientsListWrapper: {
+        paddingVertical: 20,
+    },
+
+    ingredientItemWrapper: {
+        backgroundColor: colors.white,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+        marginRight: 15,
+        borderRadius: 15,
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 10,
+        elevation: 2
+    },
+
+    ingredientImage: {
+        resizeMode: 'contain'
     },
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -35,6 +35,28 @@ export default Details = ({ route, navigation }) => {
             {/* Price */}
             <View style={styles.pricesWrapper}>
                 <Text style={styles.priceText}>${item.price}</Text>
+            </View>
+
+            {/* Pizza info */}
+            <View style={styles.infoWrapper}>
+                <View style={styles.infoLeftWrapper}>
+                    <View style={styles.infoItemWrapper}>
+                        <Text style={styles.infoItemTitle}>Size</Text>
+                        <Text style={styles.infoItemText}>{item.sizeName} {item.sizeNumber}</Text>
+                    </View>
+                    <View style={styles.infoItemWrapper}>
+                        <Text style={styles.infoItemTitle}>Crust</Text>
+                        <Text style={styles.infoItemText}>{item.crust}</Text>
+                    </View>
+                    <View style={styles.infoItemWrapper}>
+                        <Text style={styles.infoItemTitle}>Delivery in</Text>
+                        <Text style={styles.infoItemText}>{item.deliveryTime} min</Text>
+                    </View>
+                </View>
+
+                <View>
+                    <Image source={item.image} style={styles.itemImage}/>
+                </View>
             </View>
         </View>
     )
@@ -87,8 +109,40 @@ const styles = StyleSheet.create({
 
     priceText: {
         color: colors.price,
-        fontFamily: 'Montserrat-SemiBold',
+        fontFamily: 'Montserrat-Bold',
         fontSize: 32
+    },
+
+    infoWrapper: {
+        marginTop: 60,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    infoLeftWrapper: {
+        paddingLeft: 20,
+    },
+
+    infoItemWrapper: {
+        marginBottom: 20
+    },
+
+    infoItemTitle: {
+        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 14,
+        color: colors.secondary
+    },
+
+    infoItemText: {
+        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 16,
+        color: colors.textDark
+    },
+
+    itemImage: {
+        resizeMode: 'contain',
+        marginLeft: 50
     },
 
 
